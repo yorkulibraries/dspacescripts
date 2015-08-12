@@ -58,7 +58,7 @@ This will ensure that any and all changes made to the master repo are made to th
 
 For the sake of making the directory a little cleaner, all the individual scripts for different mimetypes have been moved to their respective directory.
 
-However, since many of the mimetypes will share a script (best example is /shared_scripts/final_clean.sh). Rather than an individual copy of these shared scripts living in each directory, they are hosted in the shared_scripts/ directory and each mimetype directory has a symlink to the script in the shared directory. This means that if you edit /shared_scripts/final_clean.sh, these changes will be replicated to everywhere there is a symlink.
+However, since many of the mimetypes will share a script (best example is /shared_scripts/final_clean.sh). Rather than an individual copy of these shared scripts living in each directory, they are hosted in the shared_scripts/ directory and each mimetype directory has a symlink to the script in the shared directory. This means that if you edit /shared_scripts/final_clean.sh, these changes will be replicated in every directory there is a symlink.
 
 Some of the mimetype directories have their own run.sh script, that has been customized in some fashion. Other use a shared one. As above, the shared one is in the shared_scripts directory with a symlink to the individual one. If you need to edit or customize the run.sh script for a particular mimetype, as is the case for create_dc_rs/run_rs.sh, delete the symlink and copy shared_scripts/run.sh to the respective directory. This way, you won't make global changes that will likely break the script for other mimetypes.
 
@@ -66,7 +66,7 @@ Some of the mimetype directories have their own run.sh script, that has been cus
 
 ####3) The derivatives issue
 
-Git has a feature that allows you to instruct it to ignore certain files within the repo, so that these are not controlled by version control.
+Git has a feature that allows you to instruct it to ignore certain files within the repo, so that these are not tracked by version control.
 
 The list of excluded files is in the .gitignore file. The one for dspacescripts currently has this:
 
@@ -77,6 +77,8 @@ The list of excluded files is in the .gitignore file. The one for dspacescripts 
 /*/*.pdf
 /*.csv
 /*/*.csv
+/*/Metadata.xml
+/Metadata.xml
 /*/record.*/
 /record.*
 ```
@@ -97,7 +99,7 @@ Because xalan-j_2_7_1/ is included in the repo, everything you need to test and 
 
 If, for whatever reason, you cannot test locally, please create a testing branch before you edit. Make whatever changes you want to your testing branch, push this to the Master, pull to the Yorkspace server and do your testing as needed on the server. Once you are satisfied, merge the branches in your local repo, push to master, and pull to server.
 
-The key here is that the master branch on github should _always_ have stable, working code.
+The key here is that the master branch on github should *always* have stable, working code.
 
 ####5) Testing DSpace uploads
 
@@ -105,9 +107,9 @@ Of course, won't be able to test uploads to DSpace on your local computer (unles
 
 For testing uploads to Dspace:
 
-- ssh into the Yorkspace-dev server (address: yorkspace-dev.library.yorku.ca).
-- Navigate to the /dspace/uploads/dspacescripts/ directory 
-- pull the most recent changes before doing anything else.
+1. ssh into the Yorkspace-dev server (address: yorkspace-dev.library.yorku.ca).
+2. Navigate to the /dspace/uploads/dspacescripts/ directory 
+3. pull the most recent changes before doing anything else.
 
 You can either create the records.* directories locally and ftp them onto the server, or do it on the yorkspace-dev server.
 
