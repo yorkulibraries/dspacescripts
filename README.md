@@ -89,9 +89,36 @@ What this means is that you can have as many of these types of files in your loc
 
 Whenever a new mimetype is added to this, the .gitignore file should be updated to exclude the objects. [See the documentation for more information.][7]
 
-####4) Testing changes
+####4) Testing and making changes
 
-Ideally, any code changes ought to be tested on your local machine.
+Because xalan-j\_2\_7\_1/ is included in the repo, everything you need to test and run the scripts is in the repo. Which means that you can, if you want, create all the record.* directories for uploading on your local computer. 
+
+**Ideally, any code changes ought to be tested on your local computer.**
+
+If, for whatever reason, you cannot test locally, please create a testing branch before you edit. Make whatever changes you want to your testing branch, push this to the Master, pull to the Yorkspace server and do your testing as needed on the server. Once you are satisfied, merge the branches in your local repo, push to master, and pull to server.
+
+The key here is that the master branch on github should _always_ have stable, working code.
+
+####5) Testing DSpace uploads
+
+Of course, won't be able to test uploads to DSpace on your local computer (unless you happen to have dspace installed locally). 
+
+For testing uploads to Dspace:
+
+- ssh into the Yorkspace-dev server (address: yorkspace-dev.library.yorku.ca).
+- Navigate to the /dspace/uploads/dspacescripts/ directory 
+- pull the most recent changes before doing anything else.
+
+You can either create the records.* directories locally and ftp them onto the server, or do it on the yorkspace-dev server.
+
+**Important: Because the yorkspace-dev connects to the _same_ asset store as yorkspace, you must unmount the asset store _before_ testing your uploads.**
+
+The commands to mount/unmount the asset store are:
+
+    sudo mount /dspace/assetstore
+    sudo umount /dspace/assetstore
+
+**Remember to mount the asset store once your have finished testing your uploads**
 
 ##Troubleshooting
 
