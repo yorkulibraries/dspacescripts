@@ -14,7 +14,7 @@ To work with all of this, you will need to [make an account at Github][4]. You w
 
 The key with this workflow is that any changes you make to the scripts should happen on your local computer. **Do not edit the files directly on the Yorkspace server**.
 
-1) Cloning the repo to your local computer
+####1) Cloning the repo to your local computer
 
 Open up a bash shell (the terminal.app on Macs or Git Bash on Windows) and navigate to which ever directory you want the files to live. This is entirely up to you.
 
@@ -26,7 +26,72 @@ This should create a directory called 'dspacescripts' in your current directory.
 
 **Note: in order to push to this repository, you should have organizational access to the shared YorkU Libraries org on Github. Create a redmine ticket for Nick Ruest if you need access.**
 
-2) 
+####2) Don't have write access to the YorkU libraries account?
+
+Instead of the above, fork the repository to your own github account, and clone that instead.
+
+You'll be able to clone it using a command like this:
+
+    git clone git@github.com:[username]/dspacescripts.git
+
+After this, follow the regular git workflow (commits, pushes, etc). Once you've finished your changes and pushed them to your repo, you can make a pull request to the YorkU Libraries repo. One of the people with access will have to look over your changes and commit them before you can try them on the Yorkspace server.
+
+###Actually using Git and deploying the code.
+
+####1) Making your changes live on the server.
+
+Since this isn't a general introduction on how to use git, please [refer to this introduction for more usage info][1].
+
+After you've done what you needed to do locally and pushed the changes to the main YorkU Libraries repo, log into the yorkspace server.
+
+Once there, you'll find one directory in the dspace user's home called 'dspacescripts' and a different one in the /dspaces/uploads directory. Both of these directories can pull changes from the github repo.
+
+Once you've navigated to the directories, the first thing you should always do is enter this command:
+
+    git pull
+
+This will ensure that any and all changes made to the master repo are made to the directories on the server (i.e., that all your changes are written to your current directory).
+
+**Do not edit any of the files on the server. The server does not have push access to the github repo. Always and only make changes locally and then push them to the main repo, then pull them to the server. This is set up this way on purpose to ensure that the master repo on github is always the most up-to-date code.**
+
+####2) How the dspacescripts repo is organized.
+
+For the sake of making the directory a little cleaner, all the individual scripts for different mimetypes have been moved to their respective directory.
+
+However, since many of the mimetypes will share a script (best example is /shared\_scripts/final\_clean.sh). Rather than an individual copy of these shared scripts living in each directory, they are hosted in the shared\_scripts/ directory and each mimetype directory has a symlink to the script in the shared directory. This means that if you edit /shared\_scripts/final\_clean.sh, these changes will be replicated to everywhere there is a symlink.
+
+Some of the mimetype directories have their own run.sh script, that has been customized in some fashion. Other use a shared one. As above, the shared one is in the shared\_scripts directory with a symlink to the individual one. If you need to edit or customize the run.sh script for a particular mimetype, as is the case for create\_dc\_rs/run\_rs.sh, delete the symlink and copy shared\_scripts/run.sh to the respective directory. This way, you won't make global changes that will likely break the script for other mimetypes.
+
+(Note: the scripts have all been edited to refer to the right directory to run properly re: the xml and xlst files, as well as xalan-j\_2\_7\_1/. If you move stuff around, you'll have to update the paths in the respective scripts. Also, if you get an error saying that a file is missing, it mostly likely means that the path to the file is wrong in the script, so check there first and check the directory where it ought to be, then update the path.)
+
+####3) The derivatives issue
+
+Git has a feature that allows you to instruct it to ignore certain files within the repo, so that these are not controlled by version control.
+
+The list of excluded files is in the .gitignore file. The one for dspacescripts currently has this:
+
+```
+/*.jpg
+/*/*.jpg
+/*.pdf
+/*/*.pdf
+/*.csv
+/*/*.csv
+/*/record.*/
+/record.*
+```
+
+The first six mean that any files with the mimetypes: jpg, pdf, or csv will be excluded and not tracked by git. This is mainly because when creating the uploads, we don't actually need to version control the objects being ingested. We only want to keep track of the code we need to create the uploads -- not the uploads themselves. 
+
+Thus, the last two lines exclude the output of the scripts, which are typically directories with the object and metadata all named 'record.[sequential number]'. All of these directories will not be tracked by git and should have no effect on your use of git.
+
+What this means is that you can have as many of these types of files in your local repo and none of them will be pushed to the master on github.
+
+Whenever a new mimetype is added to this, the .gitignore file should be updated to exclude the objects. [See the documentation for more information.][7]
+
+####4) Testing changes
+
+Ideally, any code changes ought to be tested on your local machine.
 
 ##Troubleshooting
 
@@ -102,3 +167,4 @@ The resulting file is named Metadata2.xml.
 [4]: https://github.com/join
 [5]: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 [6]: https://help.github.com/articles/generating-ssh-keys/
+[7]: https://git-scm.com/docs/gitignore
