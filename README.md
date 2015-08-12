@@ -58,11 +58,11 @@ This will ensure that any and all changes made to the master repo are made to th
 
 For the sake of making the directory a little cleaner, all the individual scripts for different mimetypes have been moved to their respective directory.
 
-However, since many of the mimetypes will share a script (best example is /shared\_scripts/final\_clean.sh). Rather than an individual copy of these shared scripts living in each directory, they are hosted in the shared\_scripts/ directory and each mimetype directory has a symlink to the script in the shared directory. This means that if you edit /shared\_scripts/final\_clean.sh, these changes will be replicated to everywhere there is a symlink.
+However, since many of the mimetypes will share a script (best example is /shared_scripts/final_clean.sh). Rather than an individual copy of these shared scripts living in each directory, they are hosted in the shared_scripts/ directory and each mimetype directory has a symlink to the script in the shared directory. This means that if you edit /shared_scripts/final_clean.sh, these changes will be replicated to everywhere there is a symlink.
 
-Some of the mimetype directories have their own run.sh script, that has been customized in some fashion. Other use a shared one. As above, the shared one is in the shared\_scripts directory with a symlink to the individual one. If you need to edit or customize the run.sh script for a particular mimetype, as is the case for create\_dc\_rs/run\_rs.sh, delete the symlink and copy shared\_scripts/run.sh to the respective directory. This way, you won't make global changes that will likely break the script for other mimetypes.
+Some of the mimetype directories have their own run.sh script, that has been customized in some fashion. Other use a shared one. As above, the shared one is in the shared_scripts directory with a symlink to the individual one. If you need to edit or customize the run.sh script for a particular mimetype, as is the case for create_dc_rs/run_rs.sh, delete the symlink and copy shared_scripts/run.sh to the respective directory. This way, you won't make global changes that will likely break the script for other mimetypes.
 
-(Note: the scripts have all been edited to refer to the right directory to run properly re: the xml and xlst files, as well as xalan-j\_2\_7\_1/. If you move stuff around, you'll have to update the paths in the respective scripts. Also, if you get an error saying that a file is missing, it mostly likely means that the path to the file is wrong in the script, so check there first and check the directory where it ought to be, then update the path.)
+(Note: the scripts have all been edited to refer to the right directory to run properly re: the xml and xlst files, as well as xalan-j_2_7_1/. If you move stuff around, you'll have to update the paths in the respective scripts. Also, if you get an error saying that a file is missing, it mostly likely means that the path to the file is wrong in the script, so check there first and check the directory where it ought to be, then update the path.)
 
 ####3) The derivatives issue
 
@@ -91,7 +91,7 @@ Whenever a new mimetype is added to this, the .gitignore file should be updated 
 
 ####4) Testing and making changes
 
-Because xalan-j\_2\_7\_1/ is included in the repo, everything you need to test and run the scripts is in the repo. Which means that you can, if you want, create all the record.* directories for uploading on your local computer. 
+Because xalan-j_2_7_1/ is included in the repo, everything you need to test and run the scripts is in the repo. Which means that you can, if you want, create all the record.* directories for uploading on your local computer. 
 
 **Ideally, any code changes ought to be tested on your local computer.**
 
