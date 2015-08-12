@@ -4,8 +4,8 @@
                  xmlns:redirect="http://xml.apache.org/xalan/redirect"
                  extension-element-prefixes="redirect">
 
-<xsl:template match="Metadata" >
-     <xsl:variable name="outfile" select="concat('record.', translate(identifier,' ','_'),'/metadata.xml')"/>
+<xsl:template match="dublin_core" >
+     <xsl:variable name="outfile" select="concat('record.', translate(identifier,' ','_'),'/Metadata.xml')"/>
      <redirect:write select="$outfile">
         <xsl:copy-of select="."/>
         </redirect:write>
