@@ -1,1 +1,1 @@
-for i in record*;do rm -irf $i/metadata.xml;done;
+for i in record*;do rm -irf $i/Metadata.xml;done;
