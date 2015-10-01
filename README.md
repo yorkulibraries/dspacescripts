@@ -1,5 +1,7 @@
 #Dspacescripts (how to use and work with them)
 
+**See the end of the readme for licensing information**
+
 ##Git and the workflow
 
 ###Preamble and Dependencies
@@ -189,6 +191,12 @@ To run the script, in a terminal, enter the command:
 . run_repeat_elements.sh
 
 The resulting file is named Metadata2.xml.
+
+##Licenses
+
+As this entire git repo is a collection of a few different scripts, rather than one whole application, each script incudes its respective license at the end of the script.
+
+The Xalan java thing wasn't written by anyone at York, but includes an Apache 2.0 license, so we are able to include this dependency in the repo. We haven't modified any of the code in that directory. 
 
 [1]: http://blog.scottlowe.org/2015/01/14/non-programmer-git-intro/
 [2]: https://github.com/yorkulibraries/dspacescripts

@@ -5,6 +5,6 @@ fil=`grep "<identifier>" $i/Metadata.xml|sed 's/<identifier>//'|sed 's/<\/identi
 fil2=$fil."pdf"
 echo $fil2 > $i/contents
 echo $i
-mv $fil2* $i
+cp $fil2* $i
 done
 
