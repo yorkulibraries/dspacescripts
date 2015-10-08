@@ -1,0 +1,17 @@
+**A note about the licenses in the scripts and repo**
+
+There isn't a repo-wide license of any kind, since this
+repo is a collection of individual scripts, rather than
+a singular application
+
+As such, each script will have its respective license in
+the code itself.
+
+Take particular note: at present, some of the scripts
+rely on xalan-j_2_7_1 as a dependency. We aren't actively
+developing this, but the Apache license allows us to
+store the code to make our lives just a wee bit easier.
+
+That directory has a license for the entire thing, and
+this is xalan-j_2_7_1's regardless of what other licenses
+the individual scripts have.
